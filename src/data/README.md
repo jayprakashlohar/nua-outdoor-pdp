@@ -2,14 +2,21 @@
 
 **Assignment:** Local constants, static config, and non-UI data helpers.
 
-## Suggested contents
+## Files in use (Step 2)
 
-| File / area | Purpose |
-|-------------|---------|
-| `api.ts` | Fake Store API base URL, endpoints |
-| `constants.ts` | Breakpoints (`767px`), localStorage keys, max quantity rules |
-| `mockReviews.ts` | 2–3 static review cards for Reviews panel |
-| `productMapper.ts` | Map API product → colours, sizes, stock, sale flags (API has no variants — your design choice) |
-| `deliveryRules.ts` | When to show the delivery estimate line |
+| File | Purpose |
+|------|---------|
+| `api.ts` | Fake Store API base URL, endpoints, `DEFAULT_PRODUCT_ID` |
+| `constants.ts` | Breakpoint `767`, localStorage keys, URL params, quantity / low-stock rules |
+| `types.ts` | `FakeStoreProduct`, `Review` |
+| `mockReviews.ts` | 3 static review cards |
+| `deliveryRules.ts` | When to show delivery estimate + placeholder copy |
+| `index.ts` | Barrel exports |
 
-Product **fetch** can live in a hook (`src/hooks`); **static** data and config belong here.
+## Next (Step 4)
+
+| File | Purpose |
+|------|---------|
+| `productMapper.ts` | Map API product → colours, sizes, stock, sale flags |
+
+Product **fetch** lives in `src/hooks` (Step 3).
