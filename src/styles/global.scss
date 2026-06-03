@@ -1,0 +1,69 @@
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-coral: #{$color-coral};
+  --color-coral-dark: #{$color-coral-dark};
+  --color-bg: #{$color-bg};
+  --color-bg-soft: #{$color-bg-soft};
+  --color-surface: #{$color-surface};
+  --color-text: #{$color-text};
+  --color-text-muted: #{$color-text-muted};
+  --color-border: #{$color-border};
+  --breakpoint-mobile-max: #{$breakpoint-mobile-max};
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: $font-family-base;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $color-text;
+  background-color: $color-bg;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: $color-coral-dark;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: $color-text;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}

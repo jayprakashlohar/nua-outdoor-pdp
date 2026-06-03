@@ -2,13 +2,19 @@
 
 **Assignment:** Sass/SCSS — **no Tailwind, no CSS-in-JS.**
 
-## Suggested files
+## Files in use (Step 1)
 
 | File | Purpose |
 |------|---------|
-| `_variables.scss` | Colours, spacing, typography, breakpoints |
-| `_mixins.scss` | Media queries, focus rings, truncate text |
-| `global.scss` | Reset, base `body`, fonts — import once in `main.tsx` |
+| `_variables.scss` | Nua brand colours (coral `#f67b6d`, cream bg, brown text), breakpoints |
+| `_mixins.scss` | `mobile` / `desktop` at 767px, container, focus ring |
+| `global.scss` | Reset + `body` — imported in `main.tsx` |
+| `../App.module.scss` | Page shell + header (example SCSS module) |
+
+## Later
+
+| File | Purpose |
+|------|---------|
 | `*.module.scss` | Co-located with components under `src/components` |
 
 ## Layout (from spec)

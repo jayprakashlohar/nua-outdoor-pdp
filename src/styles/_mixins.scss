@@ -1,0 +1,31 @@
+@use 'variables' as *;
+
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile-max) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: ($breakpoint-mobile-max + 1px)) {
+    @content;
+  }
+}
+
+@mixin focus-visible-ring {
+  &:focus-visible {
+    outline: 2px solid $color-coral;
+    outline-offset: 2px;
+  }
+}
+
+@mixin container {
+  width: 100%;
+  max-width: $layout-max-width;
+  margin-inline: auto;
+  padding-inline: $space-3;
+
+  @include mobile {
+    padding-inline: $space-2;
+  }
+}

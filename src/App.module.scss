@@ -1,0 +1,65 @@
+@use './styles/variables' as *;
+@use './styles/mixins' as *;
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: $color-surface;
+  border-bottom: 1px solid $color-border;
+}
+
+.headerInner {
+  @include container;
+  display: flex;
+  align-items: center;
+  min-height: $header-height;
+}
+
+.logoLink {
+  display: inline-flex;
+  align-items: center;
+  @include focus-visible-ring;
+}
+
+.logo {
+  width: 120px;
+  height: auto;
+
+  @include mobile {
+    width: 100px;
+  }
+}
+
+.main {
+  @include container;
+  flex: 1;
+  padding-block: $space-5;
+}
+
+.placeholder {
+  max-width: 36rem;
+  padding: $space-4;
+  background-color: $color-bg-soft;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: $space-2;
+}
+
+.subtitle {
+  color: $color-text-muted;
+  font-size: 1rem;
+}
+
+.accent {
+  color: $color-coral-dark;
+  font-weight: 600;
+}
