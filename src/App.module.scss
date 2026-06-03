@@ -1,5 +1,5 @@
-@use './styles/variables' as *;
-@use './styles/mixins' as *;
+@use './styles/variables' as vars;
+@use './styles/mixins' as mix;
 
 .page {
   min-height: 100vh;
@@ -7,135 +7,8 @@
   flex-direction: column;
 }
 
-.header {
-  background-color: $color-surface;
-  border-bottom: 1px solid $color-border;
-}
-
-.headerInner {
-  @include container;
-  display: flex;
-  align-items: center;
-  min-height: $header-height;
-}
-
-.logoLink {
-  display: inline-flex;
-  align-items: center;
-  @include focus-visible-ring;
-}
-
-.logo {
-  width: 120px;
-  height: auto;
-
-  @include mobile {
-    width: 100px;
-  }
-}
-
 .main {
-  @include container;
+  @include mix.container;
   flex: 1;
-  padding-block: $space-5;
-}
-
-.placeholder {
-  max-width: 36rem;
-  padding: $space-4;
-  background-color: $color-bg-soft;
-  border: 1px solid $color-border;
-  border-radius: $radius-md;
-}
-
-.title {
-  font-size: 1.75rem;
-  font-weight: 600;
-  margin-bottom: $space-2;
-}
-
-.subtitle {
-  color: $color-text-muted;
-  font-size: 1rem;
-}
-
-.accent {
-  color: $color-coral-dark;
-  font-weight: 600;
-}
-
-.status {
-  max-width: 36rem;
-  padding: $space-4;
-  background-color: $color-bg-soft;
-  border: 1px solid $color-border;
-  border-radius: $radius-md;
-}
-
-.statusTitle {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: $space-1;
-}
-
-.statusMessage {
-  color: $color-text-muted;
-  margin-bottom: $space-3;
-}
-
-.retryButton {
-  padding: $space-2 $space-3;
-  border: none;
-  border-radius: $radius-sm;
-  background-color: $color-coral;
-  color: $color-surface;
-  font-weight: 600;
-  cursor: pointer;
-  @include focus-visible-ring;
-
-  &:hover {
-    background-color: $color-coral-dark;
-  }
-}
-
-.productPreview {
-  display: grid;
-  grid-template-columns: minmax(0, 280px) 1fr;
-  gap: $space-4;
-  align-items: start;
-  max-width: 48rem;
-  padding: $space-4;
-  background-color: $color-surface;
-  border: 1px solid $color-border;
-  border-radius: $radius-md;
-
-  @include mobile {
-    grid-template-columns: 1fr;
-  }
-}
-
-.productImage {
-  width: 100%;
-  max-width: 280px;
-  object-fit: contain;
-  border-radius: $radius-sm;
-  background-color: $color-bg;
-}
-
-.productMeta {
-  display: flex;
-  flex-direction: column;
-  gap: $space-2;
-}
-
-.productCategory {
-  font-size: 0.875rem;
-  text-transform: capitalize;
-  color: $color-text-muted;
-}
-
-.productPrice {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: $color-coral-dark;
+  padding-block: vars.$space-5;
 }

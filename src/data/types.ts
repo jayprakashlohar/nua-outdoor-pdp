@@ -19,3 +19,51 @@ export type Review = {
   date: string
   body: string
 }
+
+export type StockStatus = 'available' | 'low' | 'sold-out'
+
+export type ColorOption = {
+  id: string
+  name: string
+  hex: string
+}
+
+export type SizeOption = {
+  id: string
+  label: string
+}
+
+export type ProductVariant = {
+  colorId: string
+  sizeId: string
+  stock: number
+  sku: string
+}
+
+export type GalleryImage = {
+  id: string
+  url: string
+  alt: string
+}
+
+export type SpecificationRow = {
+  label: string
+  value: string
+}
+
+/** PDP model used by UI — mapped from Fake Store (no real variants on API). */
+export type PdpProduct = {
+  id: number
+  title: string
+  brand: string
+  description: string
+  category: string
+  images: GalleryImage[]
+  colors: ColorOption[]
+  sizes: SizeOption[]
+  variants: ProductVariant[]
+  price: number
+  originalPrice: number | null
+  onSale: boolean
+  specifications: SpecificationRow[]
+}

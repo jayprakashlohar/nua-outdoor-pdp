@@ -2,14 +2,21 @@
 
 **Assignment:** Reusable UI components. Keep each file focused — split if a component grows too large.
 
-## Suggested components (build in this folder)
+## Files in use (Step 5)
+
+| Component | Purpose |
+|-----------|---------|
+| `SiteHeader` | Nua logo bar |
+| `ProductDetailLayout` | 55% gallery / 45% info desktop; stacked mobile (≤767px) |
+| `ProductDetailPage` | Fetches product, maps PDP, fills layout placeholders |
+
+## Suggested components (next)
 
 | Area | Examples |
 |------|----------|
 | Image gallery | `ImageGallery`, `ThumbnailStrip`, `ThumbnailDotIndicator` (mobile) |
-| Product info | `ProductInfoPanel`, `PriceDisplay`, `ColourSwatches`, `SizeSelector`, `QuantityPicker`, `AddToCartButton`, `DeliveryEstimate` |
-| Below fold | `ProductDetailsSection` (tabs or accordion wrapper), `DescriptionPanel`, `SpecificationsTable`, `ReviewCard` |
-| Layout | `ProductDetailPage` (page shell), `ProductDetailLayout` (two-column / single-column) |
+| Product info | `ProductInfoPanel`, `ColourSwatches`, `SizeSelector`, `QuantityPicker`, `AddToCartButton` |
+| Below fold | `ProductDetailsSection`, `SpecificationsTable`, `ReviewCard` |
 
 ## Styling
 

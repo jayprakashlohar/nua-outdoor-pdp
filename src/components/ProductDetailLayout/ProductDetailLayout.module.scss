@@ -1,0 +1,43 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.layout {
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  gap: $space-4;
+  align-items: start;
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: $space-3;
+  }
+}
+
+.galleryColumn,
+.infoColumn {
+  min-width: 0;
+}
+
+.galleryColumn {
+  @include desktop {
+    position: sticky;
+    top: $space-3;
+  }
+}
+
+.panelPlaceholder {
+  padding: $space-4;
+  background-color: $color-surface;
+  border: 1px dashed $color-border;
+  border-radius: $radius-md;
+  min-height: 200px;
+}
+
+.panelLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-text-muted;
+  margin-bottom: $space-2;
+}

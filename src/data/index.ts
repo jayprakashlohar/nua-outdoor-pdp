@@ -9,4 +9,19 @@ export {
 } from './constants'
 export { DELIVERY_ESTIMATE_TEXT, shouldShowDeliveryEstimate } from './deliveryRules'
 export { MOCK_REVIEWS } from './mockReviews'
-export type { FakeStoreProduct, Review } from './types'
+export {
+  findVariant,
+  getStockStatus,
+  mapFakeStoreToPdp,
+} from './productMapper'
+export type {
+  ColorOption,
+  FakeStoreProduct,
+  GalleryImage,
+  PdpProduct,
+  ProductVariant,
+  Review,
+  SizeOption,
+  SpecificationRow,
+  StockStatus,
+} from './types'

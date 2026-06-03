@@ -13,10 +13,10 @@
 | `deliveryRules.ts` | When to show delivery estimate + placeholder copy |
 | `index.ts` | Barrel exports |
 
-## Next (Step 4)
+## Files in use (Step 4)
 
 | File | Purpose |
 |------|---------|
-| `productMapper.ts` | Map API product → colours, sizes, stock, sale flags |
+| `productMapper.ts` | `mapFakeStoreToPdp`, variants, stock status, sale pricing |
 
 Product **fetch** lives in `src/hooks` (Step 3).

@@ -1,0 +1,130 @@
+@use '../../styles/variables' as *;
+
+.status {
+  max-width: 36rem;
+  padding: $space-4;
+  background-color: $color-bg-soft;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+}
+
+.statusTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: $space-1;
+}
+
+.statusMessage {
+  color: $color-text-muted;
+  margin-bottom: $space-3;
+}
+
+.retryButton {
+  padding: $space-2 $space-3;
+  border: none;
+  border-radius: $radius-sm;
+  background-color: $color-coral;
+  color: $color-surface;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-coral-dark;
+  }
+}
+
+.previewImage {
+  width: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: $radius-sm;
+  background-color: $color-bg;
+}
+
+.brand {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $color-coral-dark;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: $space-1;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: $space-2;
+  line-height: 1.25;
+}
+
+.priceRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: $space-2;
+  margin-bottom: $space-2;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $color-coral-dark;
+}
+
+.originalPrice {
+  font-size: 1.125rem;
+  color: $color-text-muted;
+  text-decoration: line-through;
+}
+
+.saleBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px $space-1;
+  border-radius: $radius-sm;
+  background-color: $color-coral-light;
+  color: $color-coral-dark;
+}
+
+.variantLabel {
+  font-size: 0.875rem;
+  color: $color-text-muted;
+  margin-bottom: $space-2;
+}
+
+.sizeList {
+  list-style: none;
+  margin: 0 0 $space-2;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.sizeItem {
+  display: flex;
+  justify-content: space-between;
+  gap: $space-2;
+  font-size: 0.875rem;
+}
+
+.stock_available {
+  color: $color-text-muted;
+}
+
+.stock_low {
+  color: $color-coral-dark;
+  font-weight: 600;
+}
+
+.stock_sold-out {
+  color: $color-text-muted;
+  text-decoration: line-through;
+}
+
+.hint {
+  font-size: 0.875rem;
+  color: $color-text-muted;
+  margin: 0;
+}
