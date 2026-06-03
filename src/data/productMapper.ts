@@ -25,7 +25,6 @@ const SIZE_OPTIONS: SizeOption[] = [
   { id: "xl", label: "XL" },
 ];
 
-/** Stable stock per variant — API has no inventory field. */
 function variantStock(
   productId: number,
   colorId: string,

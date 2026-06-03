@@ -1,4 +1,3 @@
-/** Fake Store API prices are USD — display as INR for this storefront. */
 export const USD_TO_INR = 83
 
 export function usdToInr(usd: number): number {

@@ -165,6 +165,12 @@
   font-weight: 500;
 }
 
+.cartHint {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: vars.$color-text-muted;
+}
+
 .addToCart {
   width: 100%;
   padding: vars.$space-3;

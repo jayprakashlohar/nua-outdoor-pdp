@@ -1,4 +1,3 @@
-/** Raw product shape from Fake Store API */
 export type FakeStoreProduct = {
   id: number
   title: string
@@ -51,7 +50,6 @@ export type SpecificationRow = {
   value: string
 }
 
-/** PDP model used by UI — mapped from Fake Store (no real variants on API). */
 export type PdpProduct = {
   id: number
   title: string

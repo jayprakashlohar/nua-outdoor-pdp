@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BREAKPOINT_MOBILE_MAX_PX } from '../data/constants'
 
-export function useMediaQuery(query: string): boolean {
+function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(() => {
     if (typeof window === 'undefined') return false
     return window.matchMedia(query).matches

@@ -1,33 +1,11 @@
 # DECISIONS.md
 
-> **Assignment requirement:** 300–500 words. The follow-up interview is built around this file.
+Write 300–500 words covering the main architectural choices in this project, what you would improve with more time, and any trade-offs you made.
 
-Replace the placeholders below with your real decisions as you build. Keep it honest and specific — it should match your actual code.
+Suggested topics:
 
----
-
-## Architectural decision (pick one fork you faced)
-
-**Options considered:**
-
-- (e.g. Context API vs another approach for cart/variant state)
-- (e.g. Tabs vs accordion for product details — justify your choice)
-- (e.g. How you handled desktop image zoom per the open questions)
-
-**What I chose and why:**
-
-_Write here._
-
----
-
-## What I would improve with more time
-
-_Write here: refactors, tests, performance, accessibility, API mapping, etc._
-
----
-
-## Other notes (optional)
-
-- URL state for colour + size (deep-linking)
-- localStorage cart rehydration approach
-- Fake Store API → variant/stock mapping strategy
+- Cart and variant state (Context + localStorage)
+- Product details UI (tabs vs accordion)
+- Mapping Fake Store products to colours, sizes, and stock
+- URL state for colour and size
+- Image gallery behaviour on mobile vs desktop

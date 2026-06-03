@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { QUANTITY_MIN, URL_PARAMS } from '../data/constants'
 import { findVariant, getStockStatus } from '../data/productMapper'
 import type { PdpProduct } from '../data/types'
+import { useCart } from '../stores/CartContext'
 
 function firstInStockColorId(pdp: PdpProduct): string {
   for (const color of pdp.colors) {
@@ -24,6 +25,7 @@ function firstInStockSizeId(pdp: PdpProduct, colorId: string): string {
 }
 
 export function useProductVariant(pdp: PdpProduct | null) {
+  const { getCartQuantityForVariant } = useCart()
   const [searchParams, setSearchParams] = useSearchParams()
   const [quantity, setQuantity] = useState(QUANTITY_MIN)
 
@@ -98,6 +100,12 @@ export function useProductVariant(pdp: PdpProduct | null) {
 
   const stockStatus = variant ? getStockStatus(variant.stock) : 'sold-out'
   const maxQuantity = variant?.stock ?? 0
+
+  useEffect(() => {
+    if (!pdp || !colorId || !sizeId) return
+    const inCartQty = getCartQuantityForVariant(pdp.id, colorId, sizeId)
+    setQuantity(inCartQty > 0 ? inCartQty : QUANTITY_MIN)
+  }, [pdp?.id, colorId, sizeId, getCartQuantityForVariant])
 
   useEffect(() => {
     if (quantity > maxQuantity && maxQuantity > 0) {

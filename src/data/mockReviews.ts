@@ -1,6 +1,5 @@
 import type { Review } from './types'
 
-/** Static reviews for the Reviews panel (assignment: 2–3 cards). */
 export const MOCK_REVIEWS: Review[] = [
   {
     id: 'review-1',

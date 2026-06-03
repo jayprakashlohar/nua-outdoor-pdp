@@ -1,12 +1,9 @@
 import styles from './Loader.module.scss'
 
 type LoaderProps = {
-  /** Accessible status text shown below the spinner */
   message?: string
   size?: 'sm' | 'md' | 'lg'
-  /** Centre in parent with comfortable min-height */
   centered?: boolean
-  /** Soft bordered panel (matches error/status blocks) */
   inPanel?: boolean
   className?: string
 }

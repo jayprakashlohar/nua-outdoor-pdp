@@ -10,7 +10,13 @@ import {
 import type { CartItem, PdpProduct } from '../data/types'
 import { findVariant } from '../data/productMapper'
 import { QUANTITY_MIN } from '../data/constants'
-import { cartItemCount, cartLineKey, cartSubtotal } from './cartUtils'
+import {
+  cartItemCount,
+  cartLineKey,
+  cartSubtotal,
+  clampLineQuantity,
+  resolveLineMaxStock,
+} from './cartUtils'
 import { loadCartFromStorage, saveCartToStorage } from './cartStorage'
 
 type AddToCartInput = {
@@ -30,6 +36,8 @@ type CartContextValue = {
   closeDrawer: () => void
   toggleDrawer: () => void
   addToCart: (input: AddToCartInput) => void
+  setVariantQuantity: (input: AddToCartInput) => void
+  syncProductStock: (pdp: PdpProduct) => void
   updateQuantity: (lineKey: string, quantity: number) => void
   removeFromCart: (lineKey: string) => void
   isVariantInCart: (productId: number, colorId: string, sizeId: string) => boolean
@@ -77,27 +85,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
     [items],
   )
 
-  const addToCart = useCallback(({ pdp, colorId, sizeId, quantity }: AddToCartInput) => {
-    const variant = findVariant(pdp, colorId, sizeId)
-    if (!variant || variant.stock <= 0) return
+  const buildCartLine = useCallback(
+    (
+      pdp: PdpProduct,
+      colorId: string,
+      sizeId: string,
+      quantity: number,
+      variantStock: number,
+    ): CartItem | null => {
+      const color = pdp.colors.find((c) => c.id === colorId)
+      const size = pdp.sizes.find((s) => s.id === sizeId)
+      if (!color || !size) return null
 
-    const color = pdp.colors.find((c) => c.id === colorId)
-    const size = pdp.sizes.find((s) => s.id === sizeId)
-    if (!color || !size) return
+      const key = cartLineKey(pdp.id, colorId, sizeId)
+      const qty = clampLineQuantity(quantity, variantStock)
 
-    const key = cartLineKey(pdp.id, colorId, sizeId)
-    const qty = Math.min(Math.max(quantity, QUANTITY_MIN), variant.stock)
-
-    setItems((prev) => {
-      const existing = prev.find((item) => item.lineKey === key)
-      if (existing) {
-        const nextQty = Math.min(existing.quantity + qty, variant.stock)
-        return prev.map((item) =>
-          item.lineKey === key ? { ...item, quantity: nextQty, maxStock: variant.stock } : item,
-        )
-      }
-
-      const line: CartItem = {
+      return {
         lineKey: key,
         productId: pdp.id,
         colorId,
@@ -108,10 +111,77 @@ export function CartProvider({ children }: { children: ReactNode }) {
         price: pdp.price,
         image: pdp.images[0]?.url ?? '',
         quantity: qty,
-        maxStock: variant.stock,
+        maxStock: variantStock,
       }
-      return [...prev, line]
+    },
+    [],
+  )
+
+  const addToCart = useCallback(({ pdp, colorId, sizeId, quantity }: AddToCartInput) => {
+    const variant = findVariant(pdp, colorId, sizeId)
+    if (!variant || variant.stock <= 0) return
+
+    const key = cartLineKey(pdp.id, colorId, sizeId)
+    const qty = clampLineQuantity(quantity, variant.stock)
+
+    setItems((prev) => {
+      const existing = prev.find((item) => item.lineKey === key)
+      if (existing) {
+        const nextQty = clampLineQuantity(existing.quantity + qty, variant.stock)
+        return prev.map((item) =>
+          item.lineKey === key
+            ? { ...item, quantity: nextQty, maxStock: variant.stock }
+            : item,
+        )
+      }
+
+      const line = buildCartLine(pdp, colorId, sizeId, qty, variant.stock)
+      return line ? [...prev, line] : prev
     })
+  }, [buildCartLine])
+
+  const setVariantQuantity = useCallback(({ pdp, colorId, sizeId, quantity }: AddToCartInput) => {
+    const variant = findVariant(pdp, colorId, sizeId)
+    if (!variant || variant.stock <= 0) return
+
+    const key = cartLineKey(pdp.id, colorId, sizeId)
+    const qty = clampLineQuantity(quantity, variant.stock)
+
+    setItems((prev) => {
+      const existing = prev.find((item) => item.lineKey === key)
+      if (existing) {
+        return prev.map((item) =>
+          item.lineKey === key
+            ? { ...item, quantity: qty, maxStock: variant.stock }
+            : item,
+        )
+      }
+
+      const line = buildCartLine(pdp, colorId, sizeId, qty, variant.stock)
+      return line ? [...prev, line] : prev
+    })
+  }, [buildCartLine])
+
+  const syncProductStock = useCallback((pdp: PdpProduct) => {
+    setItems((prev) =>
+      prev.map((item) => {
+        if (item.productId !== pdp.id) return item
+
+        const variant = findVariant(pdp, item.colorId, item.sizeId)
+        if (!variant) return item
+
+        const maxStock = variant.stock
+        if (maxStock <= 0) {
+          return { ...item, maxStock: 0, quantity: item.quantity }
+        }
+
+        return {
+          ...item,
+          maxStock,
+          quantity: clampLineQuantity(item.quantity, maxStock),
+        }
+      }),
+    )
   }, [])
 
   const updateQuantity = useCallback((lineKey: string, quantity: number) => {
@@ -121,8 +191,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return prev.map((item) => {
         if (item.lineKey !== lineKey) return item
-        const nextQty = Math.min(quantity, item.maxStock)
-        return { ...item, quantity: nextQty }
+        const maxStock = resolveLineMaxStock(item)
+        const nextQty = clampLineQuantity(quantity, maxStock)
+        return { ...item, quantity: nextQty, maxStock }
       })
     })
   }, [])
@@ -142,6 +213,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       closeDrawer,
       toggleDrawer,
       addToCart,
+      setVariantQuantity,
+      syncProductStock,
       updateQuantity,
       removeFromCart,
       isVariantInCart,
@@ -157,6 +230,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
       closeDrawer,
       toggleDrawer,
       addToCart,
+      setVariantQuantity,
+      syncProductStock,
       updateQuantity,
       removeFromCart,
       isVariantInCart,

@@ -141,17 +141,34 @@
 
 .lineActions {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: vars.$space-2;
-  margin-top: vars.$space-1;
+  justify-content: space-between;
+  gap: vars.$space-1;
+  margin-top: 6px;
 }
 
 .lineControls {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   border: 1px solid vars.$color-border;
   border-radius: vars.$radius-sm;
+}
+
+.lineActionsEnd {
+  display: inline-flex;
+  align-items: center;
+  gap: vars.$space-2;
+  flex-shrink: 0;
+}
+
+.stockLimit {
+  margin: 0;
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  color: vars.$color-coral-dark;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .removeBtn {
@@ -159,10 +176,12 @@
   border: none;
   background: none;
   font-size: 0.75rem;
+  line-height: 1.2;
   font-weight: 600;
   color: vars.$color-coral-dark;
   text-decoration: underline;
   cursor: pointer;
+  white-space: nowrap;
   @include mix.focus-visible-ring;
 
   &:hover {

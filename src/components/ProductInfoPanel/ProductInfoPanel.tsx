@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { formatInr } from '../../data/currency'
 import { DELIVERY_ESTIMATE_TEXT, shouldShowDeliveryEstimate } from '../../data/deliveryRules'
 import { QUANTITY_MIN } from '../../data/constants'
@@ -29,25 +30,43 @@ export function ProductInfoPanel({
   onSizeSelect,
   onQuantityChange,
 }: ProductInfoPanelProps) {
-  const { addToCart, isVariantInCart, openDrawer } = useCart()
+  const {
+    addToCart,
+    setVariantQuantity,
+    syncProductStock,
+    getCartQuantityForVariant,
+    openDrawer,
+  } = useCart()
 
   const isSoldOut = stockStatus === 'sold-out'
-  const inCart = isVariantInCart(pdp.id, colorId, sizeId)
+  const cartQuantity = getCartQuantityForVariant(pdp.id, colorId, sizeId)
+  const inCart = cartQuantity > 0
+  const quantityUnchanged = inCart && quantity === cartQuantity
   const showDelivery = shouldShowDeliveryEstimate({
     variantSelected: Boolean(colorId && sizeId),
     variantInStock: !isSoldOut,
   })
 
+  useEffect(() => {
+    syncProductStock(pdp)
+  }, [pdp, syncProductStock])
+
   const handleAddToCart = () => {
-    if (isSoldOut || inCart) return
-    addToCart({ pdp, colorId, sizeId, quantity })
+    if (isSoldOut || quantityUnchanged) return
+    if (inCart) {
+      setVariantQuantity({ pdp, colorId, sizeId, quantity })
+    } else {
+      addToCart({ pdp, colorId, sizeId, quantity })
+    }
     openDrawer()
   }
 
   const ctaLabel = isSoldOut
     ? 'Out of stock'
     : inCart
-      ? 'Already added'
+      ? quantityUnchanged
+        ? 'In your cart'
+        : 'Update cart'
       : 'Add to cart'
 
   return (
@@ -148,6 +167,12 @@ export function ProductInfoPanel({
         <p className={styles.stockMessage}>Only {maxQuantity} left in this size</p>
       )}
 
+      {inCart && !isSoldOut && (
+        <p className={styles.cartHint}>
+          {cartQuantity} in cart · max {maxQuantity}
+        </p>
+      )}
+
       {isSoldOut && (
         <p className={styles.stockMessage} role="status">
           This combination is out of stock — try another colour or size.
@@ -157,7 +182,7 @@ export function ProductInfoPanel({
       <button
         type="button"
         className={styles.addToCart}
-        disabled={isSoldOut || inCart}
+        disabled={isSoldOut || quantityUnchanged}
         onClick={handleAddToCart}
       >
         {ctaLabel}

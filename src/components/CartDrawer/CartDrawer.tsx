@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { formatInr } from '../../data/currency'
 import { useCart } from '../../stores/CartContext'
+import { resolveLineMaxStock } from '../../stores/cartUtils'
 import styles from './CartDrawer.module.scss'
 
 export function CartDrawer() {
@@ -50,7 +51,11 @@ export function CartDrawer() {
             </div>
           ) : (
             <ul className={styles.list}>
-              {items.map((item) => (
+              {items.map((item) => {
+                const maxStock = resolveLineMaxStock(item)
+                const atMax = item.quantity >= maxStock
+
+                return (
                 <li key={item.lineKey} className={styles.line}>
                   <img
                     src={item.image}
@@ -84,7 +89,7 @@ export function CartDrawer() {
                           type="button"
                           className={styles.qtyBtn}
                           aria-label="Increase quantity"
-                          disabled={item.quantity >= item.maxStock}
+                          disabled={atMax}
                           onClick={() =>
                             updateQuantity(item.lineKey, item.quantity + 1)
                           }
@@ -92,14 +97,21 @@ export function CartDrawer() {
                           +
                         </button>
                       </div>
-                      <button
-                        type="button"
-                        className={styles.removeBtn}
-                        aria-label={`Remove ${item.title} from cart`}
-                        onClick={() => removeFromCart(item.lineKey)}
-                      >
-                        Remove
-                      </button>
+                      <div className={styles.lineActionsEnd}>
+                        {atMax && maxStock > 0 && (
+                          <span className={styles.stockLimit}>
+                            Max {maxStock}
+                          </span>
+                        )}
+                        <button
+                          type="button"
+                          className={styles.removeBtn}
+                          aria-label={`Remove ${item.title} from cart`}
+                          onClick={() => removeFromCart(item.lineKey)}
+                        >
+                          Remove
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div className={styles.lineAside}>
@@ -108,7 +120,7 @@ export function CartDrawer() {
                     </p>
                   </div>
                 </li>
-              ))}
+              )})}
             </ul>
           )}
         </div>
