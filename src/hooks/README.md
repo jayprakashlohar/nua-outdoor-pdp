@@ -2,11 +2,16 @@
 
 **Assignment:** Shared React hooks (logic reused across components).
 
-## Suggested hooks
+## Files in use (Step 3)
 
 | Hook | Purpose |
 |------|---------|
-| `useProduct` | Fetch product from Fake Store API (`https://fakestoreapi.com`) |
+| `useProduct` | Fetches one product by id; `isLoading`, `error`, `refetch` |
+
+## Suggested hooks (later)
+
+| Hook | Purpose |
+|------|---------|
 | `useLocalStorage` | Read/write persisted cart or UI state |
 | `useProductVariant` | Selected colour + size, stock, sale price |
 | `useMediaQuery` | Breakpoint at **767px** (mobile ≤767, desktop >767) |
