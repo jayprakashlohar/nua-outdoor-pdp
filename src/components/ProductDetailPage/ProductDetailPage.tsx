@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { DEFAULT_PRODUCT_ID } from '../../data/api'
 import { findVariant, getStockStatus, mapFakeStoreToPdp } from '../../data/productMapper'
 import { useProduct } from '../../hooks/useProduct'
+import { ImageGallery } from '../ImageGallery/ImageGallery'
 import { ProductDetailLayout } from '../ProductDetailLayout/ProductDetailLayout'
 import layoutStyles from '../ProductDetailLayout/ProductDetailLayout.module.scss'
 import styles from './ProductDetailPage.module.scss'
@@ -13,11 +14,6 @@ export function ProductDetailPage() {
     () => (product ? mapFakeStoreToPdp(product) : null),
     [product],
   )
-
-  const previewVariant = useMemo(() => {
-    if (!pdp) return null
-    return findVariant(pdp, pdp.colors[0].id, pdp.sizes[2].id)
-  }, [pdp])
 
   if (isLoading) {
     return (
@@ -43,18 +39,7 @@ export function ProductDetailPage() {
 
   return (
     <ProductDetailLayout
-      gallery={
-        <div className={layoutStyles.panelPlaceholder}>
-          <p className={layoutStyles.panelLabel}>Gallery</p>
-          <img
-            src={pdp.images[0].url}
-            alt={pdp.images[0].alt}
-            className={styles.previewImage}
-            width={400}
-            height={400}
-          />
-        </div>
-      }
+      gallery={<ImageGallery images={pdp.images} />}
       info={
         <div className={layoutStyles.panelPlaceholder}>
           <p className={layoutStyles.panelLabel}>Product info</p>
@@ -90,11 +75,6 @@ export function ProductDetailPage() {
               )
             })}
           </ul>
-          {previewVariant && (
-            <p className={styles.hint}>
-              Layout shell ready — gallery &amp; controls in next steps.
-            </p>
-          )}
         </div>
       }
     />

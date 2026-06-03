@@ -33,14 +33,6 @@
   }
 }
 
-.previewImage {
-  width: 100%;
-  max-width: 100%;
-  object-fit: contain;
-  border-radius: $radius-sm;
-  background-color: $color-bg;
-}
-
 .brand {
   font-size: 0.875rem;
   font-weight: 600;
@@ -121,10 +113,4 @@
 .stock_sold-out {
   color: $color-text-muted;
   text-decoration: line-through;
-}
-
-.hint {
-  font-size: 0.875rem;
-  color: $color-text-muted;
-  margin: 0;
 }

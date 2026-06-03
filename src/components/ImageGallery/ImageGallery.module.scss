@@ -1,0 +1,110 @@
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mix;
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-2;
+}
+
+.mainWrap {
+  background-color: vars.$color-surface;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-md;
+  overflow: hidden;
+}
+
+.mainImage {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background-color: vars.$color-bg;
+  display: block;
+  transition: transform 0.35s ease;
+
+  @include mix.desktop {
+    .mainWrap:hover & {
+      transform: scale(1.08);
+    }
+  }
+}
+
+.thumbStrip {
+  display: flex;
+  gap: vars.$space-1;
+  flex-wrap: wrap;
+
+  @include mix.mobile {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: vars.$space-1;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: vars.$color-border;
+      border-radius: 4px;
+    }
+  }
+}
+
+.thumb {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  padding: 0;
+  border: 2px solid vars.$color-border;
+  border-radius: vars.$radius-sm;
+  background: vars.$color-surface;
+  cursor: pointer;
+  overflow: hidden;
+  scroll-snap-align: center;
+  @include mix.focus-visible-ring;
+
+  @include mix.mobile {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+.thumbActive {
+  border-color: vars.$color-coral;
+  box-shadow: 0 0 0 1px vars.$color-coral;
+}
+
+.thumbImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.dots {
+  display: none;
+
+  @include mix.mobile {
+    display: flex;
+    justify-content: center;
+    gap: vars.$space-1;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: vars.$color-border;
+  cursor: pointer;
+  @include mix.focus-visible-ring;
+}
+
+.dotActive {
+  background-color: vars.$color-coral;
+  transform: scale(1.15);
+}
