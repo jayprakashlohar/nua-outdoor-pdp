@@ -1,36 +1,59 @@
 import { useMemo } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import { DEFAULT_PRODUCT_ID } from '../../data/api'
-import { findVariant, getStockStatus, mapFakeStoreToPdp } from '../../data/productMapper'
+import { mapFakeStoreToPdp } from '../../data/productMapper'
 import { useProduct } from '../../hooks/useProduct'
+import { useProductVariant } from '../../hooks/useProductVariant'
+import { Loader } from '../Loader'
 import { ImageGallery } from '../ImageGallery/ImageGallery'
 import { ProductDetailLayout } from '../ProductDetailLayout/ProductDetailLayout'
-import layoutStyles from '../ProductDetailLayout/ProductDetailLayout.module.scss'
+import { ProductDetailsSection } from '../ProductDetailsSection/ProductDetailsSection'
+import { ProductInfoPanel } from '../ProductInfoPanel/ProductInfoPanel'
 import styles from './ProductDetailPage.module.scss'
 
 export function ProductDetailPage() {
-  const { product, isLoading, error, refetch } = useProduct(DEFAULT_PRODUCT_ID)
+  const { productId: productIdParam } = useParams()
+  const productId = Number(productIdParam) || DEFAULT_PRODUCT_ID
+  const { product, isLoading, error, refetch } = useProduct(productId)
 
   const pdp = useMemo(
     () => (product ? mapFakeStoreToPdp(product) : null),
     [product],
   )
 
+  const variantState = useProductVariant(pdp)
+
+  const backLink = (
+    <Link to="/" className={styles.backLink}>
+      <span className={styles.backIcon} aria-hidden>
+        ←
+      </span>
+      Back to products
+    </Link>
+  )
+
   if (isLoading) {
     return (
-      <div className={styles.status} role="status" aria-live="polite">
-        <p className={styles.statusTitle}>Loading product…</p>
+      <div className={styles.page}>
+        {backLink}
+        <div className={styles.loaderSection}>
+          <Loader message="Loading product…" centered inPanel />
+        </div>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className={styles.status} role="alert">
-        <p className={styles.statusTitle}>Could not load product</p>
-        <p className={styles.statusMessage}>{error}</p>
-        <button type="button" className={styles.retryButton} onClick={refetch}>
-          Try again
-        </button>
+      <div className={styles.page}>
+        {backLink}
+        <div className={styles.status} role="alert">
+          <p className={styles.statusTitle}>Could not load product</p>
+          <p className={styles.statusMessage}>{error}</p>
+          <button type="button" className={styles.retryButton} onClick={refetch}>
+            Try again
+          </button>
+        </div>
       </div>
     )
   }
@@ -38,45 +61,25 @@ export function ProductDetailPage() {
   if (!pdp) return null
 
   return (
-    <ProductDetailLayout
-      gallery={<ImageGallery images={pdp.images} />}
-      info={
-        <div className={layoutStyles.panelPlaceholder}>
-          <p className={layoutStyles.panelLabel}>Product info</p>
-          <p className={styles.brand}>{pdp.brand}</p>
-          <h1 className={styles.title}>{pdp.title}</h1>
-          <div className={styles.priceRow}>
-            {pdp.onSale && pdp.originalPrice && (
-              <span className={styles.originalPrice}>
-                ${pdp.originalPrice.toFixed(2)}
-              </span>
-            )}
-            <span className={styles.price}>${pdp.price.toFixed(2)}</span>
-            {pdp.onSale && <span className={styles.saleBadge}>Sale</span>}
-          </div>
-          <p className={styles.variantLabel}>
-            {pdp.colors.length} colours · {pdp.sizes.length} sizes
-          </p>
-          <ul className={styles.sizeList}>
-            {pdp.sizes.map((size) => {
-              const variant = findVariant(pdp, pdp.colors[0].id, size.id)
-              const status = variant ? getStockStatus(variant.stock) : 'sold-out'
-              return (
-                <li key={size.id} className={styles.sizeItem}>
-                  <span>{size.label}</span>
-                  <span className={styles[`stock_${status}`]}>
-                    {status === 'low' && variant
-                      ? `Only ${variant.stock} left`
-                      : status === 'sold-out'
-                        ? 'Sold out'
-                        : 'In stock'}
-                  </span>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      }
-    />
+    <div className={styles.page}>
+      {backLink}
+      <ProductDetailLayout
+        gallery={<ImageGallery images={pdp.images} />}
+        info={
+          <ProductInfoPanel
+            pdp={pdp}
+            colorId={variantState.colorId}
+            sizeId={variantState.sizeId}
+            quantity={variantState.quantity}
+            stockStatus={variantState.stockStatus}
+            maxQuantity={variantState.maxQuantity}
+            onColorSelect={variantState.selectColor}
+            onSizeSelect={variantState.selectSize}
+            onQuantityChange={variantState.setQuantity}
+          />
+        }
+      />
+      <ProductDetailsSection pdp={pdp} />
+    </div>
   )
 }

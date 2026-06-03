@@ -1,0 +1,228 @@
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mix;
+
+.page {
+  width: 100%;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: vars.$space-2 vars.$space-3;
+  margin-bottom: vars.$space-3;
+
+  @include mix.mobile {
+    flex-direction: column;
+    align-items: stretch;
+    gap: vars.$space-2;
+  }
+}
+
+.heading {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  flex: 0 1 auto;
+  min-width: 0;
+
+  @include mix.mobile {
+    font-size: 1.125rem;
+    white-space: normal;
+  }
+}
+
+.searchArea {
+  flex: 1 1 180px;
+  max-width: 420px;
+  min-width: 0;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: auto;
+    margin-left: auto;
+  }
+
+  @include mix.mobile {
+    flex: 1 1 100%;
+    max-width: none;
+    margin-left: 0;
+  }
+}
+
+.searchField {
+  position: relative;
+  width: 100%;
+}
+
+.searchInput {
+  width: 100%;
+  height: 36px;
+  padding: 0 36px 0 vars.$space-2;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-sm;
+  font-size: 0.875rem;
+  font-family: inherit;
+  background: vars.$color-surface;
+
+  &:focus {
+    outline: 2px solid vars.$color-coral;
+    outline-offset: 0;
+    border-color: vars.$color-coral;
+  }
+
+  @include mix.mobile {
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+.clearIcon {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: vars.$color-bg-soft;
+  color: vars.$color-text-muted;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: vars.$color-coral-light;
+    color: vars.$color-coral-dark;
+  }
+}
+
+.searching {
+  margin: 0 0 vars.$space-2;
+  font-size: 0.8125rem;
+  color: vars.$color-text-muted;
+}
+
+.noResults {
+  padding: vars.$space-4;
+  background: vars.$color-bg-soft;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-md;
+  color: vars.$color-text-muted;
+  margin: 0;
+
+  @include mix.mobile {
+    padding: vars.$space-3;
+    font-size: 0.875rem;
+  }
+}
+
+.status {
+  padding: vars.$space-4;
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: vars.$space-3;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: vars.$space-2;
+  }
+
+  @include mix.mobile {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: vars.$color-surface;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-md;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.cardLink {
+  flex: 1;
+  padding: vars.$space-2;
+  text-decoration: none;
+  color: inherit;
+
+  @include mix.mobile {
+    padding: vars.$space-1;
+  }
+}
+
+.cardImage {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  background: vars.$color-bg;
+  border-radius: vars.$radius-sm;
+}
+
+.cardTitle {
+  margin: vars.$space-2 0 vars.$space-1;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+
+  @include mix.mobile {
+    font-size: 0.8125rem;
+    margin: vars.$space-1 0;
+  }
+}
+
+.cardPrice {
+  margin: 0;
+  font-weight: 700;
+  color: vars.$color-coral-dark;
+  font-size: 0.9375rem;
+
+  @include mix.mobile {
+    font-size: 0.875rem;
+  }
+}
+
+.addBtn {
+  margin: vars.$space-2;
+  margin-top: 0;
+  padding: vars.$space-2;
+  border: none;
+  border-radius: vars.$radius-sm;
+  background: vars.$color-coral;
+  color: vars.$color-surface;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+
+  @include mix.mobile {
+    margin: vars.$space-1;
+    margin-top: 0;
+    padding: vars.$space-2 vars.$space-1;
+    font-size: 0.8125rem;
+  }
+
+  &:disabled {
+    background: vars.$color-border;
+    color: vars.$color-text-muted;
+    cursor: not-allowed;
+  }
+}

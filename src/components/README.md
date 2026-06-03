@@ -2,6 +2,12 @@
 
 **Assignment:** Reusable UI components. Keep each file focused — split if a component grows too large.
 
+## Shared UI
+
+| Component | Purpose |
+|-----------|---------|
+| `Loader` | Reusable spinner + message (`centered`, `inPanel`, `size`) |
+
 ## Files in use (Step 5)
 
 | Component | Purpose |

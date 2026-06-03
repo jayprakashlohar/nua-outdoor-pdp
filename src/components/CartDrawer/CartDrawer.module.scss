@@ -1,0 +1,245 @@
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mix;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(61, 46, 42, 0.4);
+  border: none;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(100%, 400px);
+  background: vars.$color-surface;
+  z-index: 101;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
+  animation: slideIn 0.25s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: vars.$space-3;
+  border-bottom: 1px solid vars.$color-border;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.closeBtn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  @include mix.focus-visible-ring;
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: vars.$space-3;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100%;
+  padding: vars.$space-4 vars.$space-2;
+}
+
+.emptyTitle {
+  margin: 0 0 vars.$space-2;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: vars.$color-text;
+  line-height: 1.4;
+}
+
+.emptySubtitle {
+  margin: 0 0 vars.$space-4;
+  font-size: 0.9375rem;
+  color: vars.$color-text-muted;
+  line-height: 1.5;
+}
+
+.shopLink {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: vars.$color-coral-dark;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-3;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: vars.$space-2;
+  align-items: start;
+}
+
+.thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: vars.$radius-sm;
+  background: vars.$color-bg;
+}
+
+.lineMeta {
+  min-width: 0;
+}
+
+.lineTitle {
+  margin: 0 0 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.lineVariant,
+.linePrice {
+  margin: 0;
+  font-size: 0.75rem;
+  color: vars.$color-text-muted;
+}
+
+.lineActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: vars.$space-2;
+  margin-top: vars.$space-1;
+}
+
+.lineControls {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-sm;
+}
+
+.removeBtn {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: vars.$color-coral-dark;
+  text-decoration: underline;
+  cursor: pointer;
+  @include mix.focus-visible-ring;
+
+  &:hover {
+    color: vars.$color-text;
+  }
+}
+
+.lineAside {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: vars.$space-1;
+}
+
+.qtyBtn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: vars.$color-bg-soft;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.qty {
+  min-width: 28px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.lineTotal {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.footer {
+  padding: vars.$space-3;
+  border-top: 1px solid vars.$color-border;
+}
+
+.totals {
+  margin-bottom: vars.$space-3;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: vars.$color-text-muted;
+  margin-bottom: vars.$space-1;
+}
+
+.totalRowBold {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: vars.$color-text;
+}
+
+.checkout {
+  width: 100%;
+  padding: vars.$space-3;
+  border: none;
+  border-radius: vars.$radius-sm;
+  background-color: vars.$color-coral;
+  color: vars.$color-surface;
+  font-weight: 700;
+  font-size: 1rem;
+
+  &:disabled {
+    background-color: vars.$color-border;
+    color: vars.$color-text-muted;
+    cursor: not-allowed;
+  }
+}

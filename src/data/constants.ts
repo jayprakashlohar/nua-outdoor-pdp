@@ -20,3 +20,7 @@ export const GALLERY = {
   /** Mobile dot indicator — one dot per visible thumbnail “page” (tune in gallery step). */
   thumbnailsPerPageMobile: 4,
 } as const
+
+export const SEARCH_DEBOUNCE_MS = 300
+
+export const PRODUCTS_PER_PAGE = 8

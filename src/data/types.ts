@@ -67,3 +67,17 @@ export type PdpProduct = {
   onSale: boolean
   specifications: SpecificationRow[]
 }
+
+export type CartItem = {
+  lineKey: string
+  productId: number
+  colorId: string
+  colorName: string
+  sizeId: string
+  sizeLabel: string
+  title: string
+  price: number
+  image: string
+  quantity: number
+  maxStock: number
+}

@@ -1,0 +1,83 @@
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mix;
+
+.centeredWrap {
+  display: flex;
+  width: 100%;
+  min-height: min(50vh, 360px);
+  justify-content: center;
+  align-items: center;
+  padding: vars.$space-4 0;
+
+  @include mix.mobile {
+    min-height: min(40vh, 280px);
+    padding: vars.$space-3 0;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: vars.$space-2;
+}
+
+.panel {
+  width: 100%;
+  max-width: 28rem;
+  padding: vars.$space-5 vars.$space-4;
+  background-color: vars.$color-bg-soft;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-md;
+  box-sizing: border-box;
+
+  @include mix.mobile {
+    max-width: none;
+    padding: vars.$space-4 vars.$space-3;
+  }
+}
+
+.spinner {
+  display: block;
+  border-radius: 50%;
+  border: 3px solid vars.$color-border;
+  border-top-color: vars.$color-coral;
+  animation: spin 0.75s linear infinite;
+  flex-shrink: 0;
+}
+
+.sm .spinner {
+  width: 24px;
+  height: 24px;
+  border-width: 2px;
+}
+
+.md .spinner {
+  width: 36px;
+  height: 36px;
+}
+
+.lg .spinner {
+  width: 48px;
+  height: 48px;
+  border-width: 4px;
+}
+
+.message {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: vars.$color-text-muted;
+  text-align: center;
+}
+
+.lg .message {
+  font-size: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

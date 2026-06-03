@@ -1,0 +1,196 @@
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mix;
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-3;
+}
+
+.brand {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: vars.$color-coral-dark;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.priceRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: vars.$space-2;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: vars.$color-coral-dark;
+}
+
+.originalPrice {
+  font-size: 1.125rem;
+  color: vars.$color-text-muted;
+  text-decoration: line-through;
+}
+
+.saleBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px vars.$space-1;
+  border-radius: vars.$radius-sm;
+  background-color: vars.$color-coral-light;
+  color: vars.$color-coral-dark;
+}
+
+.fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.legend {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: vars.$space-2;
+  display: block;
+}
+
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: vars.$space-2;
+}
+
+.swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid vars.$color-border;
+  cursor: pointer;
+  padding: 0;
+  @include mix.focus-visible-ring;
+}
+
+.swatchActive {
+  border-color: vars.$color-coral;
+  box-shadow: 0 0 0 2px vars.$color-surface, 0 0 0 4px vars.$color-coral;
+}
+
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: vars.$space-2;
+}
+
+.sizeBtn {
+  min-width: 56px;
+  padding: vars.$space-2;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-sm;
+  background: vars.$color-surface;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.875rem;
+  @include mix.focus-visible-ring;
+}
+
+.sizeActive {
+  border-color: vars.$color-coral;
+  background-color: vars.$color-coral-light;
+}
+
+.sizeDisabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.sizeHint {
+  font-size: 0.65rem;
+  color: vars.$color-text-muted;
+}
+
+.quantityRow {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-1;
+}
+
+.quantityControls {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-sm;
+  width: fit-content;
+}
+
+.qtyBtn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: vars.$color-bg-soft;
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.qtyValue {
+  min-width: 40px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.stockMessage {
+  margin: 0;
+  font-size: 0.875rem;
+  color: vars.$color-coral-dark;
+  font-weight: 500;
+}
+
+.addToCart {
+  width: 100%;
+  padding: vars.$space-3;
+  border: none;
+  border-radius: vars.$radius-sm;
+  background-color: vars.$color-coral;
+  color: vars.$color-surface;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  @include mix.focus-visible-ring;
+
+  &:hover:not(:disabled) {
+    background-color: vars.$color-coral-dark;
+  }
+
+  &:disabled {
+    background-color: vars.$color-border;
+    color: vars.$color-text-muted;
+    cursor: not-allowed;
+  }
+}
+
+.delivery {
+  margin: 0;
+  font-size: 0.875rem;
+  color: vars.$color-text-muted;
+  text-align: center;
+}

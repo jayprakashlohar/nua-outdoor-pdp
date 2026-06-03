@@ -91,6 +91,18 @@ export function findVariant(
   return pdp.variants.find((v) => v.colorId === colorId && v.sizeId === sizeId);
 }
 
+export function getFirstInStockVariant(pdp: PdpProduct) {
+  for (const color of pdp.colors) {
+    for (const size of pdp.sizes) {
+      const variant = findVariant(pdp, color.id, size.id)
+      if (variant && variant.stock > 0) {
+        return { color, size, variant }
+      }
+    }
+  }
+  return null
+}
+
 export function mapFakeStoreToPdp(product: FakeStoreProduct): PdpProduct {
   const onSale = isOnSale(product);
 

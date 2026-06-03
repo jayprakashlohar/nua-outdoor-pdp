@@ -1,29 +1,76 @@
-@use '../../styles/variables' as *;
-@use '../../styles/mixins' as *;
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mix;
 
 .header {
-  background-color: $color-surface;
-  border-bottom: 1px solid $color-border;
+  background-color: vars.$color-surface;
+  border-bottom: 1px solid vars.$color-border;
 }
 
 .inner {
-  @include container;
+  @include mix.container;
   display: flex;
   align-items: center;
-  min-height: $header-height;
+  gap: vars.$space-3;
+  min-height: vars.$header-height;
 }
 
 .logoLink {
   display: inline-flex;
   align-items: center;
-  @include focus-visible-ring;
+  flex-shrink: 0;
+  @include mix.focus-visible-ring;
 }
 
 .logo {
   width: 120px;
   height: auto;
 
-  @include mobile {
+  @include mix.mobile {
     width: 100px;
   }
+}
+
+.cartBtn {
+  margin-left: auto;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid vars.$color-border;
+  border-radius: vars.$radius-sm;
+  background: vars.$color-surface;
+  color: vars.$color-text;
+  cursor: pointer;
+  flex-shrink: 0;
+  @include mix.focus-visible-ring;
+
+  &:hover {
+    border-color: vars.$color-coral;
+    color: vars.$color-coral-dark;
+  }
+}
+
+.cartIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: vars.$color-coral;
+  color: vars.$color-surface;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
