@@ -1,79 +1,62 @@
 @use '../../styles/variables' as vars;
 @use '../../styles/mixins' as mix;
 
-.centeredWrap {
-  display: flex;
-  width: 100%;
-  min-height: min(50vh, 360px);
-  justify-content: center;
-  align-items: center;
-  padding: vars.$space-4 0;
-
-  @include mix.mobile {
-    min-height: min(40vh, 280px);
-    padding: vars.$space-3 0;
-  }
-}
-
-.inner {
+.inline,
+.centered {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: vars.$space-2;
+  gap: 12px;
 }
 
-.panel {
+.centered {
   width: 100%;
-  max-width: 28rem;
-  padding: vars.$space-5 vars.$space-4;
-  background-color: vars.$color-bg-soft;
-  border: 1px solid vars.$color-border;
-  border-radius: vars.$radius-md;
-  box-sizing: border-box;
+  min-height: min(42vh, 320px);
+  padding: vars.$space-4 0;
 
   @include mix.mobile {
-    max-width: none;
-    padding: vars.$space-4 vars.$space-3;
+    min-height: min(36vh, 260px);
   }
 }
 
 .spinner {
   display: block;
   border-radius: 50%;
-  border: 3px solid vars.$color-border;
+  border: 2.5px solid vars.$color-coral-light;
   border-top-color: vars.$color-coral;
-  animation: spin 0.75s linear infinite;
+  animation: spin 0.85s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
   flex-shrink: 0;
 }
 
 .sm .spinner {
-  width: 24px;
-  height: 24px;
-  border-width: 2px;
+  width: 28px;
+  height: 28px;
 }
 
 .md .spinner {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
+  border-width: 2.5px;
 }
 
 .lg .spinner {
   width: 48px;
   height: 48px;
-  border-width: 4px;
+  border-width: 3px;
 }
 
 .message {
   margin: 0;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.8125rem;
+  font-weight: 500;
   color: vars.$color-text-muted;
   text-align: center;
+  letter-spacing: 0.02em;
 }
 
 .lg .message {
-  font-size: 1rem;
+  font-size: 0.9375rem;
 }
 
 @keyframes spin {

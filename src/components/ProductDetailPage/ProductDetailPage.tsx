@@ -37,7 +37,7 @@ export function ProductDetailPage() {
       <div className={styles.page}>
         {backLink}
         <div className={styles.loaderSection}>
-          <Loader message="Loading product…" centered inPanel />
+          <Loader message="Loading product…" centered />
         </div>
       </div>
     )

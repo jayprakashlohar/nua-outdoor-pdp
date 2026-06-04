@@ -73,7 +73,7 @@ export function ProductListPage() {
   }
 
   if (isLoading) {
-    return <Loader message="Loading products…" centered inPanel />
+    return <Loader message="Loading products…" centered />
   }
 
   if (error) {
@@ -131,7 +131,17 @@ export function ProductListPage() {
                 onClick={clearSearch}
                 aria-label="Clear search"
               >
-                ×
+                <svg
+                  className={styles.clearIconSvg}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  aria-hidden
+                >
+                  <path d="M6 6l12 12M18 6L6 18" />
+                </svg>
               </button>
             )}
           </div>
