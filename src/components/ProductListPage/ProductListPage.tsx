@@ -141,7 +141,7 @@ export function ProductListPage() {
                     {noStock
                       ? 'Out of stock'
                       : alreadyAdded
-                        ? 'Already added'
+                        ? 'Added'
                         : 'Add to cart'}
                   </button>
                 </li>

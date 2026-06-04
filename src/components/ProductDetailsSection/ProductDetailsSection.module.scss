@@ -8,13 +8,29 @@
 
 .tabs {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: vars.$space-1;
   border-bottom: 1px solid vars.$color-border;
   margin-bottom: vars.$space-3;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: vars.$color-border transparent;
+
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: vars.$color-border;
+    border-radius: 2px;
+  }
 }
 
 .tab {
+  flex-shrink: 0;
+  white-space: nowrap;
   padding: vars.$space-2 vars.$space-3;
   border: none;
   background: transparent;

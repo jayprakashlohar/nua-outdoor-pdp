@@ -17,10 +17,10 @@ npm run build
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Local dev server |
-| `npm run build` | Production build |
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Local dev server         |
+| `npm run build`   | Production build         |
 | `npm run preview` | Preview production build |
 
 ## Notes
@@ -28,5 +28,3 @@ npm run build
 - Prices are shown in INR (converted from API USD).
 - Colour and size selections sync to the URL query string on the product page.
 - Lighthouse screenshot: add to `docs/` when ready.
-
-See `DECISIONS.md` for architecture and trade-offs.

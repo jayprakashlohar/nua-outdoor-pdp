@@ -13,6 +13,6 @@ export const URL_PARAMS = {
   size: "size",
 } as const;
 
-export const SEARCH_DEBOUNCE_MS = 300;
+export const SEARCH_DEBOUNCE_MS = 400;
 
 export const PRODUCTS_PER_PAGE = 8;
