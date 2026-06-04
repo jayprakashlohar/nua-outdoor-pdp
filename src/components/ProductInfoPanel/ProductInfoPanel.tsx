@@ -3,6 +3,7 @@ import { formatInr } from '../../data/currency'
 import { DELIVERY_ESTIMATE_TEXT, shouldShowDeliveryEstimate } from '../../data/deliveryRules'
 import { QUANTITY_MIN } from '../../data/constants'
 import type { PdpProduct } from '../../data/types'
+import { shouldShowSizeSelector } from '../../data/categoryVariants'
 import { findVariant, getStockStatus } from '../../data/productMapper'
 import { WishlistButton } from '../WishlistButton/WishlistButton'
 import { useCart } from '../../stores/CartContext'
@@ -62,6 +63,10 @@ export function ProductInfoPanel({
     openDrawer()
   }
 
+  const showSizes = shouldShowSizeSelector(pdp.sizes)
+  const colorLabel = pdp.variantLabels.color
+  const sizeLabel = pdp.variantLabels.size
+
   const ctaLabel = isSoldOut
     ? 'Out of stock'
     : inCart
@@ -95,8 +100,8 @@ export function ProductInfoPanel({
       </div>
 
       <fieldset className={styles.fieldset}>
-        <legend className={styles.legend}>Colour</legend>
-        <div className={styles.swatches} role="radiogroup" aria-label="Colour">
+        <legend className={styles.legend}>{colorLabel}</legend>
+        <div className={styles.swatches} role="radiogroup" aria-label={colorLabel}>
           {pdp?.colors?.map((color) => (
             <button
               key={color.id}
@@ -112,9 +117,10 @@ export function ProductInfoPanel({
         </div>
       </fieldset>
 
+      {showSizes && (
       <fieldset className={styles.fieldset}>
-        <legend className={styles.legend}>Size</legend>
-        <div className={styles.sizes} role="radiogroup" aria-label="Size">
+        <legend className={styles.legend}>{sizeLabel}</legend>
+        <div className={styles.sizes} role="radiogroup" aria-label={sizeLabel}>
           {pdp.sizes.map((size) => {
             const variant = findVariant(pdp, colorId, size.id)
             const status = variant ? getStockStatus(variant.stock) : 'sold-out'
@@ -143,6 +149,7 @@ export function ProductInfoPanel({
           })}
         </div>
       </fieldset>
+      )}
 
       {!isSoldOut && (
         <div className={styles.quantityRow}>
@@ -176,7 +183,10 @@ export function ProductInfoPanel({
       )}
 
       {stockStatus === 'low' && maxQuantity > 0 && (
-        <p className={styles.stockMessage}>Only {maxQuantity} left in this size</p>
+        <p className={styles.stockMessage}>
+          Only {maxQuantity} left
+          {showSizes ? ` for this ${sizeLabel.toLowerCase()}` : ''}
+        </p>
       )}
 
       {inCart && !isSoldOut && (
@@ -187,7 +197,11 @@ export function ProductInfoPanel({
 
       {isSoldOut && (
         <p className={styles.stockMessage} role="status">
-          This combination is out of stock — try another colour or size.
+          This combination is out of stock — try another{' '}
+          {showSizes
+            ? `${colorLabel.toLowerCase()} or ${sizeLabel.toLowerCase()}`
+            : colorLabel.toLowerCase()}
+          .
         </p>
       )}
 

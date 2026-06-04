@@ -50,12 +50,21 @@ export type SpecificationRow = {
   value: string
 }
 
+export type CategoryKind = 'clothing' | 'electronics' | 'jewelry' | 'general'
+
+export type VariantLabels = {
+  color: string
+  size: string
+}
+
 export type PdpProduct = {
   id: number
   title: string
   brand: string
   description: string
   category: string
+  categoryKind: CategoryKind
+  variantLabels: VariantLabels
   images: GalleryImage[]
   colors: ColorOption[]
   sizes: SizeOption[]

@@ -51,7 +51,7 @@ export function useProductVariant(pdp: PdpProduct | null) {
 
     setColorId(defaultColor)
     setSizeId(defaultSize)
-  }, [pdp, colorFromUrl, sizeFromUrl])
+  }, [pdp?.id, pdp?.colors, pdp?.sizes, colorFromUrl, sizeFromUrl])
 
   const syncUrl = useCallback(
     (nextColor: string, nextSize: string) => {
