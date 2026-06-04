@@ -17,7 +17,6 @@ export function useProductCatalog(
   const [category, setCategory] = useState('')
   const [priceRangeId, setPriceRangeId] = useState<PriceRangeId>('all')
   const [minRating, setMinRating] = useState<number | null>(null)
-  const [onSaleOnly, setOnSaleOnly] = useState(false)
   const [sort, setSort] = useState<ProductSort>('default')
 
   const debouncedQuery = useDebouncedValue(query, debounceMs)
@@ -34,7 +33,6 @@ export function useProductCatalog(
         category,
         priceRangeId,
         minRating,
-        onSaleOnly,
         sort,
       }),
     [
@@ -43,7 +41,6 @@ export function useProductCatalog(
       category,
       priceRangeId,
       minRating,
-      onSaleOnly,
       sort,
     ],
   )
@@ -53,7 +50,6 @@ export function useProductCatalog(
     category !== '' ||
     priceRangeId !== 'all' ||
     minRating !== null ||
-    onSaleOnly ||
     sort !== 'default'
 
   const isDebouncing = query !== debouncedQuery
@@ -64,7 +60,6 @@ export function useProductCatalog(
     setCategory('')
     setPriceRangeId('all')
     setMinRating(null)
-    setOnSaleOnly(false)
     setSort('default')
   }
 
@@ -84,8 +79,6 @@ export function useProductCatalog(
     setPriceRangeId,
     minRating,
     setMinRating,
-    onSaleOnly,
-    setOnSaleOnly,
     sort,
     setSort,
     categories,

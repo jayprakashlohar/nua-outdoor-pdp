@@ -31,8 +31,6 @@ export function ProductListPage() {
     setPriceRangeId,
     minRating,
     setMinRating,
-    onSaleOnly,
-    setOnSaleOnly,
     sort,
     setSort,
     categories,
@@ -216,21 +214,11 @@ export function ProductListPage() {
             </select>
           </div>
 
-          <div className={styles.controlActions}>
-            <button
-              type="button"
-              className={`${styles.togglePill} ${onSaleOnly ? styles.togglePillActive : ''}`}
-              aria-pressed={onSaleOnly}
-              onClick={() => setOnSaleOnly((v) => !v)}
-            >
-              Sale
+          {showClearAll && (
+            <button type="button" className={styles.resetBtn} onClick={clearAll}>
+              Reset
             </button>
-            {showClearAll && (
-              <button type="button" className={styles.resetBtn} onClick={clearAll}>
-                Reset
-              </button>
-            )}
-          </div>
+          )}
         </div>
       </section>
 

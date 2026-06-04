@@ -1,5 +1,4 @@
 import type { FakeStoreProduct } from './types'
-import { isProductOnSale } from './productMapper'
 
 export type ProductSort = 'default' | 'price-asc' | 'price-desc' | 'rating-desc'
 
@@ -76,14 +75,6 @@ export function filterByMinRating(
   return products.filter((p) => p.rating.rate >= minRating)
 }
 
-export function filterBySaleOnly(
-  products: FakeStoreProduct[],
-  onSaleOnly: boolean,
-): FakeStoreProduct[] {
-  if (!onSaleOnly) return products
-  return products.filter(isProductOnSale)
-}
-
 export function sortProducts(
   products: FakeStoreProduct[],
   sort: ProductSort,
@@ -106,7 +97,6 @@ export type ApplyFiltersInput = {
   category: string
   priceRangeId: PriceRangeId
   minRating: number | null
-  onSaleOnly: boolean
   sort: ProductSort
 }
 
@@ -128,6 +118,5 @@ export function applyProductFilters(
   list = filterByCategory(list, filters.category)
   list = filterByPriceRange(list, filters.priceRangeId)
   list = filterByMinRating(list, filters.minRating)
-  list = filterBySaleOnly(list, filters.onSaleOnly)
   return sortProducts(list, filters.sort)
 }

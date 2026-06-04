@@ -23,14 +23,14 @@ export function SiteHeader() {
         <div className={styles.actions}>
           <Link
             to="/wishlist"
-            className={styles.iconBtn}
+            className={`${styles.iconBtn} ${wishlistCount > 0 ? styles.iconBtnActive : ''}`}
             aria-label={`Wishlist, ${wishlistCount} items`}
           >
             <svg
               className={styles.icon}
               viewBox="0 0 24 24"
               aria-hidden
-              fill="none"
+              fill={wishlistCount > 0 ? 'currentColor' : 'none'}
               stroke="currentColor"
               strokeWidth="2"
             >
@@ -45,7 +45,7 @@ export function SiteHeader() {
 
           <button
             type="button"
-            className={styles.iconBtn}
+            className={`${styles.iconBtn} ${cartCount > 0 ? styles.iconBtnActive : ''}`}
             aria-label={`Open cart, ${cartCount} items`}
             onClick={openCart}
           >

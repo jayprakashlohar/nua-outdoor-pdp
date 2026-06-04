@@ -2,8 +2,12 @@
 @use '../../styles/mixins' as mix;
 
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   background-color: vars.$color-surface;
   border-bottom: 1px solid vars.$color-border;
+  box-shadow: 0 1px 0 vars.$color-border;
 }
 
 .inner {
@@ -34,12 +38,8 @@
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: vars.$space-1;
   flex-shrink: 0;
-  padding: 4px;
-  background: vars.$color-bg;
-  border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(236, 217, 208, 0.6);
 }
 
 .iconBtn {
@@ -47,51 +47,59 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: none;
   border-radius: 999px;
   background: transparent;
-  color: vars.$color-text-muted;
+  color: vars.$color-coral;
   cursor: pointer;
   text-decoration: none;
   transition:
     background-color 0.15s ease,
     color 0.15s ease,
-    box-shadow 0.15s ease;
+    transform 0.15s ease;
   @include mix.focus-visible-ring;
 
   &:hover {
-    background: vars.$color-surface;
+    background: vars.$color-coral-light;
     color: vars.$color-coral-dark;
-    box-shadow: 0 2px 8px rgba(61, 46, 42, 0.08);
+    transform: translateY(-1px);
   }
 
   &:active {
     background: vars.$color-coral-light;
-    color: vars.$color-coral-dark;
+    transform: translateY(0);
   }
 }
 
+.iconBtnActive {
+  color: vars.$color-coral-dark;
+  background: vars.$color-coral-light;
+}
+
 .icon {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
 .badge {
   position: absolute;
-  top: -6px;
-  right: -6px;
+  top: 4px;
+  right: 4px;
   min-width: 18px;
   height: 18px;
-  padding: 0 4px;
+  padding: 0 5px;
+  border: 2px solid vars.$color-surface;
   border-radius: 999px;
-  background: vars.$color-coral;
+  background: linear-gradient(135deg, vars.$color-coral 0%, vars.$color-coral-dark 100%);
   color: vars.$color-surface;
-  font-size: 0.65rem;
+  font-size: 0.625rem;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(229, 106, 92, 0.45);
 }

@@ -220,43 +220,11 @@
   }
 }
 
-.controlActions {
-  display: flex;
-  align-items: center;
-  gap: vars.$space-2;
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-.togglePill {
-  height: 32px;
-  padding: 0 14px;
-  border: 1px solid vars.$color-border;
-  border-radius: 999px;
-  background: vars.$color-surface;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  font-family: inherit;
-  color: vars.$color-text-muted;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  @include mix.focus-visible-ring;
-
-  &:hover {
-    border-color: vars.$color-coral;
-    color: vars.$color-coral-dark;
-  }
-}
-
-.togglePillActive {
-  background: vars.$color-coral-light;
-  border-color: vars.$color-coral;
-  color: vars.$color-coral-dark;
-}
-
 .resetBtn {
+  flex-shrink: 0;
   height: 32px;
   padding: 0 12px;
+  margin-left: auto;
   border: none;
   border-radius: 999px;
   background: transparent;
