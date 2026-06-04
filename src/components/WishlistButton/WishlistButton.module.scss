@@ -1,0 +1,33 @@
+@use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mix;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: vars.$color-text-muted;
+  cursor: pointer;
+  @include mix.focus-visible-ring;
+
+  &:hover {
+    color: vars.$color-coral-dark;
+  }
+}
+
+.saved {
+  color: vars.$color-coral;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}

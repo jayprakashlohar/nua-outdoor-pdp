@@ -4,6 +4,7 @@ import { DELIVERY_ESTIMATE_TEXT, shouldShowDeliveryEstimate } from '../../data/d
 import { QUANTITY_MIN } from '../../data/constants'
 import type { PdpProduct } from '../../data/types'
 import { findVariant, getStockStatus } from '../../data/productMapper'
+import { WishlistButton } from '../WishlistButton/WishlistButton'
 import { useCart } from '../../stores/CartContext'
 import styles from './ProductInfoPanel.module.scss'
 
@@ -72,7 +73,18 @@ export function ProductInfoPanel({
   return (
     <div className={styles.panel}>
       <p className={styles.brand}>{pdp.brand}</p>
-      <h1 className={styles.title}>{pdp.title}</h1>
+      <div className={styles.titleRow}>
+        <h1 className={styles.title}>{pdp.title}</h1>
+        <WishlistButton
+          product={{
+            productId: pdp.id,
+            title: pdp.title,
+            price: pdp.price,
+            image: pdp.images[0]?.url ?? '',
+          }}
+          showLabel
+        />
+      </div>
 
       <div className={styles.priceRow}>
         {pdp.onSale && pdp.originalPrice && (

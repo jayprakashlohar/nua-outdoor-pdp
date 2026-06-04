@@ -30,8 +30,15 @@
   }
 }
 
-.cartBtn {
+.actions {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: vars.$space-1;
+  flex-shrink: 0;
+}
+
+.iconBtn {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -43,7 +50,7 @@
   background: vars.$color-surface;
   color: vars.$color-text;
   cursor: pointer;
-  flex-shrink: 0;
+  text-decoration: none;
   @include mix.focus-visible-ring;
 
   &:hover {
@@ -52,7 +59,7 @@
   }
 }
 
-.cartIcon {
+.icon {
   width: 22px;
   height: 22px;
 }

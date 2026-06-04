@@ -16,11 +16,20 @@
   margin: 0;
 }
 
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: vars.$space-2;
+}
+
 .title {
   font-size: 1.75rem;
   font-weight: 600;
   line-height: 1.25;
   margin: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .priceRow {

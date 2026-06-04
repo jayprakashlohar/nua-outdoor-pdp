@@ -151,6 +151,7 @@
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: vars.$color-surface;
@@ -158,6 +159,23 @@
   border-radius: vars.$radius-md;
   overflow: hidden;
   min-width: 0;
+}
+
+.wishlistBtn {
+  position: absolute;
+  top: vars.$space-1;
+  right: vars.$space-1;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: vars.$color-surface;
+  border: 1px solid vars.$color-border;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    border-color: vars.$color-coral;
+  }
 }
 
 .cardLink {

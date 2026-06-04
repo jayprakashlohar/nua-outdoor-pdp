@@ -79,3 +79,10 @@ export type CartItem = {
   quantity: number
   maxStock: number
 }
+
+export type WishlistItem = {
+  productId: number
+  title: string
+  price: number
+  image: string
+}

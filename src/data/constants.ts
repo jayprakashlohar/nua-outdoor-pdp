@@ -6,6 +6,7 @@ export const LOW_STOCK_THRESHOLD = 2;
 
 export const STORAGE_KEYS = {
   cart: "nua-outdoor-pdp:cart",
+  wishlist: "nua-outdoor-pdp:wishlist",
 } as const;
 
 export const URL_PARAMS = {

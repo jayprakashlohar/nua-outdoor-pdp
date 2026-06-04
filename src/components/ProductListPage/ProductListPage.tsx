@@ -7,6 +7,7 @@ import { useProductSearch } from '../../hooks/useProductSearch'
 import { useProducts } from '../../hooks/useProducts'
 import { Loader } from '../Loader'
 import { Pagination } from '../Pagination/Pagination'
+import { WishlistButton } from '../WishlistButton/WishlistButton'
 import { useCart } from '../../stores/CartContext'
 import styles from './ProductListPage.module.scss'
 
@@ -123,6 +124,15 @@ export function ProductListPage() {
 
               return (
                 <li key={product.id} className={styles.card}>
+                  <WishlistButton
+                    product={{
+                      productId: product.id,
+                      title: product.title,
+                      price: product.price,
+                      image: product.image,
+                    }}
+                    className={styles.wishlistBtn}
+                  />
                   <Link to={`/product/${product.id}`} className={styles.cardLink}>
                     <img
                       src={product.image}
